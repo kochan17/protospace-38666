@@ -1,10 +1,15 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!, only: [:create] # ログインしているユーザーのみコメントを投稿できるようにする
+
   def create
-    @comment = Comment.create(comment_params)
+    @comment = Comment.new(comment_params)
     if @comment.save
       redirect_to prototype_path(@comment.prototype)
     else
-      redirect_to prototype_path(@comment.prototype), alert: 'コメントを投稿できませんでした。'
+      @prototype = @comment.prototype
+      @comments = @prototype.comments.includes(:user) # 関連するコメントとユーザーを取得
+      flash.now[:alert] = 'コメントを投稿できませんでした。'
+      render 'prototypes/show'
     end
   end
 

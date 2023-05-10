@@ -13,9 +13,12 @@
             <%= image_tag prototype.image, class: 'card__img' %>
           <% end %>
           <div class="card__body">
-            <h3 class="card__title"><%= prototype.name %></h3>
+            <%= link_to prototype_path(prototype) do %>
+              <h3 class="card__title"><%= prototype.name %></h3>
+            <% end %>
             <p class="card__catch_copy"><%= prototype.catch_copy %></p>
             <p class="card__concept"><%= prototype.concept %></p>
+            <p class="card__user"><%= prototype.user.name %></p>
           </div>
         </div>
       <% end %>

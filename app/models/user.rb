@@ -7,11 +7,9 @@ class User < ApplicationRecord
   has_many :prototypes
   has_many :comments, dependent: :destroy
   # ここからバリデーションの設定を追加
-  validates :username, presence: true
   validates :email, presence: true
   validates :encrypted_password, presence: true
-  validates :username, presence: true
-  # 必要に応じて、他のカラムにもバリデーションを追加してください
+  validates :name, presence: true
 
   # 他のバリデーションの例
   # validates :email, uniqueness: true

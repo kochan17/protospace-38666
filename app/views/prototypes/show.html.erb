@@ -4,7 +4,7 @@
       <p class="prototype__hedding">
         <%= @prototype.name %>
       </p>
-      <%= link_to "by #{@prototype.user.username}", user_path(@prototype.user), class: :prototype__user %> <!-- この行を修正 -->
+      <%= link_to "by #{@prototype.user.username}", user_path(@prototype.user), class: :prototype__user %>
       <% if user_signed_in? && current_user.id == @prototype.user_id %>
         <div class="prototype__manage">
           <%= link_to "編集する", edit_prototype_path(@prototype), class: :prototype__btn %>
@@ -30,10 +30,10 @@
       </div>
       <div class="prototype__comment">
         <% if user_signed_in? %>
-           <%= form_with(model: [@prototype, @comment], local: true) do |form| %>
-             <%= form.text_area :content, placeholder: "コメントする", rows: "2" %>
-             <%= form.submit "SEND" %>
-           <% end %>
+          <%= form_with(model: [@prototype, @comment], local: true) do |form| %>
+            <%= form.text_area :content, placeholder: "コメントする", rows: "2" %>
+            <%= form.submit "SEND" %>
+          <% end %>
         <% else %>
           <strong><p>※※※ コメントの投稿には新規登録/ログインが必要です ※※※</p></strong>
         <% end %>
@@ -41,7 +41,7 @@
           <h4>＜コメント一覧＞</h4>
           <% @comments.each do |comment| %>
             <p>
-              <strong><%= link_to comment.user.username, user_path(comment.user) %>：</strong> <!-- この行を修正 -->
+              <strong><%= link_to comment.user.username, user_path(comment.user) %>：</strong>
               <%= comment.content %>
             </p>
           <% end %>
