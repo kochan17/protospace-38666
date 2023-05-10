@@ -1,0 +1,11 @@
+<div class="card">
+  <%= link_to prototype_path(prototype), class: :card__link do %>
+    <%= image_tag prototype.image, class: :card__img %>
+    <div class="card__text">
+      <h2 class="card__title"><%= prototype.name %></h2>
+      <p class="card__catch_copy"><%= prototype.catch_copy %></p>
+      <p class="card__user_name"><%= prototype.user.username %></p>
+        <%= link_to prototype.user.username, user_path(prototype.user) %>
+    </div>
+  <% end %>
+</div>

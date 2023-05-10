@@ -1,0 +1,52 @@
+<main class="main">
+  <div class="inner">
+    <div class="prototype__wrapper">
+      <p class="prototype__hedding">
+        <%= @prototype.name %>
+      </p>
+      <%= link_to "by #{@prototype.user.username}", user_path(@prototype.user), class: :prototype__user %> <!-- この行を修正 -->
+      <% if user_signed_in? && current_user.id == @prototype.user_id %>
+        <div class="prototype__manage">
+          <%= link_to "編集する", edit_prototype_path(@prototype), class: :prototype__btn %>
+          <%= link_to "削除する", prototype_path(@prototype), method: :delete, class: :prototype__btn %>
+        </div>
+      <% end %>
+      <div class="prototype__image">
+        <%= image_tag @prototype.image %>
+      </div>
+      <div class="prototype__body">
+        <div class="prototype__detail">
+          <p class="detail__title">キャッチコピー</p>
+          <p class="detail__message">
+            <%= @prototype.catch_copy %>
+          </p>
+        </div>
+        <div class="prototype__detail">
+          <p class="detail__title">コンセプト</p>
+          <p class="detail__message">
+            <%= @prototype.concept %>
+          </p>
+        </div>
+      </div>
+      <div class="prototype__comment">
+        <% if user_signed_in? %>
+           <%= form_with(model: [@prototype, @comment], local: true) do |form| %>
+             <%= form.text_area :content, placeholder: "コメントする", rows: "2" %>
+             <%= form.submit "SEND" %>
+           <% end %>
+        <% else %>
+          <strong><p>※※※ コメントの投稿には新規登録/ログインが必要です ※※※</p></strong>
+        <% end %>
+        <div class="comments">
+          <h4>＜コメント一覧＞</h4>
+          <% @comments.each do |comment| %>
+            <p>
+              <strong><%= link_to comment.user.username, user_path(comment.user) %>：</strong> <!-- この行を修正 -->
+              <%= comment.content %>
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
