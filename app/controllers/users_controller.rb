@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def show
-    @user = User.find(params[:prototype_id] || params[:id])
-    @prototypes = @user.prototypes
+    @user = User.find(params[:id])
   end
+
 end
